@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import Hand from "./Hand";
 const Clock = ({ timeZone }) => {
   const [hour, setHour] = useState(0);
   const [min, setMin] = useState(0);
   const [second, setSecond] = useState(0);
+  const [time, setTime] = useState("");
 
   const update = (e) => {
     const date = new Date()
@@ -13,18 +15,19 @@ const Clock = ({ timeZone }) => {
     setHour((Number(time[0]) / 12) * 360 + 90);
     setMin((Number(time[1]) / 60) * 360 + 90);
     setSecond((Number(time[2]) / 60) * 360 + 90);
+    setTime(date);
   };
 
   useEffect(() => {
     setInterval(update, 1000);
-    return () => {
-      console.log("clock mount");
-    };
-  }, []);
-
+  });
   return (
-    <div className="clock">
-      <div
+    <div>        
+      <h1>
+        {timeZone} - {time}
+      </h1>
+      <div className="clock">
+        {/* <div
         className="hand hour"
         data-hour-hand
         style={{transform:`rotate(${hour}deg)`}}
@@ -37,19 +40,23 @@ const Clock = ({ timeZone }) => {
       <div
         className="hand second"
         style={{transform:`rotate(${second}deg)`}}
-      ></div>
-      <div className="number number1">1</div>
-      <div className="number number2">2</div>
-      <div className="number number3">3</div>
-      <div className="number number4">4</div>
-      <div className="number number5">5</div>
-      <div className="number number6">6</div>
-      <div className="number number7">7</div>
-      <div className="number number8">8</div>
-      <div className="number number9">9</div>
-      <div className="number number10">10</div>
-      <div className="number number11">11</div>
-      <div className="number number12">12</div>
+      ></div> */}
+        <Hand type={"hand hour"} time={hour} />
+        <Hand type={"hand minute"} time={min} />
+        <Hand type={"hand second"} time={second} />
+        <div className="number number1">1</div>
+        <div className="number number2">2</div>
+        <div className="number number3">3</div>
+        <div className="number number4">4</div>
+        <div className="number number5">5</div>
+        <div className="number number6">6</div>
+        <div className="number number7">7</div>
+        <div className="number number8">8</div>
+        <div className="number number9">9</div>
+        <div className="number number10">10</div>
+        <div className="number number11">11</div>
+        <div className="number number12">12</div>
+      </div>
     </div>
   );
 };
