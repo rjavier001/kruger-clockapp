@@ -8,7 +8,9 @@ const Clock = ({ timeZone }) => {
   const [time, setTime] = useState("");
 
   const update = (e) => {
-    const date = new Date().toLocaleString("en-US", { timeZone: timeZone }).split(" ")[1];
+    const date = new Date()
+      .toLocaleString("en-US", { timeZone: timeZone })
+      .split(" ")[1];
     const time = date.split(":");
     setHour((Number(time[0]) / 12) * 360);
     setMin((Number(time[1]) / 60) * 360);
@@ -20,12 +22,12 @@ const Clock = ({ timeZone }) => {
     setInterval(update, 1000);
   });
   return (
-    <div>        
+    <div>
       <h1>
         {timeZone} - {time}
       </h1>
       <div className="clock">
-        <div
+        {/* <div
         className="hand hour"
         data-hour-hand
         style={{transform:`rotate(${hour}deg)`}}
@@ -38,10 +40,10 @@ const Clock = ({ timeZone }) => {
       <div
         className="hand second"
         style={{transform:`rotate(${second}deg)`}}
-      ></div>
-        {/* <Hand type={"hand hour"} time={hour} />
+      ></div> */}
+        <Hand type={"hand hour"} time={hour} />
         <Hand type={"hand minute"} time={min} />
-        <Hand type={"hand second"} time={second} /> */}
+        <Hand type={"hand second"} time={second} />
         <div className="number number1">1</div>
         <div className="number number2">2</div>
         <div className="number number3">3</div>
